@@ -114,14 +114,14 @@ mod metamod {
             config.define("COMPILER_MSVC", None);
             config.define("COMPILER_MSVC32", None);
 
-            config.object(sdk_path.join("lib/public/tier0.lib"));
-            config.object(sdk_path.join("lib/public/tier1.lib"));
-            config.object(sdk_path.join("lib/public/vstdlib.lib"));
-            config.object(sdk_path.join("lib/public/mathlib.lib"));
+            println!("cargo:rustc-link-search=native={}", sdk_path.join("lib/public").to_str().unwrap());
 
+            println!("cargo:rustc-link-lib=tier0");
+            println!("cargo:rustc-link-lib=tier1");
+            println!("cargo:rustc-link-lib=vstdlib");
+            println!("cargo:rustc-link-lib=mathlib");
             if cfg!(feature = "csgo") {
-                config.object(sdk_path.join("lib/public/interfaces.lib"));
-                config.object("legacy_stdio_definitions.lib");
+                println!("cargo:rustc-link-lib=interfaces");
             }
         }
 
@@ -201,41 +201,17 @@ fn main() {
     }
     #[cfg(target_env = "msvc")]
     {
-        #[cfg(debug_assertions)]
-        {
-            //config.flag("/MTd");
-            //config.flag("/NODEFAULTLIB:libcmt");
-        }
-        /*
-        #[cfg(not(debug_assertions))]
-        {
-            config.flag("/MT");
-        }
-        */
         config.define("_CRT_SECURE_NO_DEPRECATE", None);
         config.define("_CRT_SECURE_NO_WARNINGS", None);
         config.define("_CRT_NONSTDC_NO_DEPRECATE", None);
         config.define("_ITERATOR_DEBUG_LEVEL", Some("0"));
 
-        //config.flag("/W3");
         config.flag("/EHsc");
         config.flag("/GR-");
-        config.flag("/TP");
-        //config.flag("/MACHINE:X86");
+
         config.flag("/Oy-");
 
-        config.object("kernel32.lib");
-        config.object("user32.lib");
-        config.object("gdi32.lib");
-        config.object("winspool.lib");
-        config.object("comdlg32.lib");
-        config.object("advapi32.lib");
-        config.object("shell32.lib");
-        config.object("ole32.lib");
-        config.object("oleaut32.lib");
-        config.object("uuid.lib");
-        config.object("odbc32.lib");
-        config.object("odbccp32.lib");
+        config.object("legacy_stdio_definitions.lib");
     }
 
     #[cfg(target_os = "windows")]
@@ -271,7 +247,7 @@ fn main() {
         .include(sm_root.join("public/amtl/amtl"))
         .include(sm_root.join("public/amtl"));
 
-    config.file("sm/smsdk_ext.cpp");
+    config.file(sm_root.join("public/smsdk_ext.cpp"));
     config.file("sm/CDetour/detours.cpp");
 
     let mut c = cc::Build::new();

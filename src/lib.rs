@@ -858,5 +858,3 @@ cpp! {{
         { nullptr, nullptr },
     };
 }}
-
-pub(crate) mod sm;
