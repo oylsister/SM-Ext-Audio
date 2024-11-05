@@ -26,6 +26,5 @@ jobs:
         export SOURCEMOD="deps/sourcemod"
         export MMSOURCE="deps/mmsource"
         export HL2SDKCSGO="deps/hl2sdk-csgo"
-        rustup target add i686-unknown-linux-gnu
-        cargo build --target i686-unknown-linux-gnu --release
+        cargo build --release
 
