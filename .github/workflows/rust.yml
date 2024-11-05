@@ -1,0 +1,31 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get Dependency
+      run: |
+        git clone https://github.com/alliedmodders/sourcemod --recursive -b 1.10-dev deps/sourcemod
+        git clone https://github.com/alliedmodders/metamod-source -b 1.10-dev deps/mmsource
+        git clone https://github.com/alliedmodders/hl2sdk -b csgo deps/hl2sdk-csgo
+    - uses: actions/checkout@v4
+    - name: Build
+      run: | 
+        export SOURCEMOD="deps/sourcemod"
+        export MMSOURCE="deps/mmsource"
+        export HL2SDKCSGO="deps/hl2sdk-csgo"
+        rustup target add i686-unknown-linux-gnu
+        cargo build --target i686-unknown-linux-gnu --release
+
