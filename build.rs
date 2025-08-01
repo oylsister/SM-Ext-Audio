@@ -247,7 +247,20 @@ fn main() {
         .include(sm_root.join("public/amtl/amtl"))
         .include(sm_root.join("public/amtl"));
 
-    config.file(sm_root.join("public/smsdk_ext.cpp"));
+    // Check if the file exists in the sm_root path first
+    let smsdk_path = sm_root.join("public/smsdk_ext.cpp");
+    if !smsdk_path.exists() {
+        // Try the deps path as a fallback
+        let deps_path = Path::new("deps/sourcemod/public/smsdk_ext.cpp");
+        if deps_path.exists() {
+            config.file(deps_path);
+        } else {
+            panic!("Could not find smsdk_ext.cpp in either {} or {}", 
+                smsdk_path.display(), deps_path.display());
+        }
+    } else {
+        config.file(smsdk_path);
+    }
     config.file("sm/CDetour/detours.cpp");
 
     let mut c = cc::Build::new();
