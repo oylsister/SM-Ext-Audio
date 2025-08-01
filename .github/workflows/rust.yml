@@ -27,6 +27,6 @@ jobs:
         export SOURCEMOD="/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/sourcemod"
         export MMSOURCE="/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/mmsource"
         export HL2SDKCSGO="/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/hl2sdk-csgo"
-        ls -la "/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/sourcemod/public/smsdk_ext.cpp
+        ls -la "/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/sourcemod/public/smsdk_ext.cpp"
         cargo build --release
 
