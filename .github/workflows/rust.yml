@@ -21,6 +21,7 @@ jobs:
         git clone https://github.com/alliedmodders/sourcemod --recursive -b 1.10-dev deps/sourcemod
         git clone https://github.com/alliedmodders/metamod-source -b 1.10-dev deps/mmsource
         git clone https://github.com/alliedmodders/hl2sdk -b csgo deps/hl2sdk-csgo
+        ls
     - uses: actions/checkout@v4
     - name: Build
       run: | 
