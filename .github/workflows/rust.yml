@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v4
     - name: Get Dependency
       run: |
         git clone https://github.com/alliedmodders/sourcemod --recursive -b 1.10-dev deps/sourcemod
