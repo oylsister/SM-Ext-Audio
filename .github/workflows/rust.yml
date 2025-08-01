@@ -21,13 +21,12 @@ jobs:
         git clone https://github.com/alliedmodders/sourcemod --recursive -b 1.10-dev deps/sourcemod
         git clone https://github.com/alliedmodders/metamod-source -b 1.10-dev deps/mmsource
         git clone https://github.com/alliedmodders/hl2sdk -b csgo deps/hl2sdk-csgo
-        ls
     - uses: actions/checkout@v4
     - name: Build
       run: | 
-        export SOURCEMOD="deps/sourcemod"
-        export MMSOURCE="deps/mmsource"
-        export HL2SDKCSGO="deps/hl2sdk-csgo"
-        ls -la deps/sourcemod/public/smsdk_ext.cpp
+        export SOURCEMOD="/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/sourcemod"
+        export MMSOURCE="/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/mmsource"
+        export HL2SDKCSGO="/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/hl2sdk-csgo"
+        ls -la "/home/runner/work/SM-Ext-Audio/SM-Ext-Audio/deps/sourcemod/public/smsdk_ext.cpp
         cargo build --release
 
