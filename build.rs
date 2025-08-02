@@ -99,13 +99,34 @@ mod metamod {
             }
             #[cfg(target_env = "gnu")]
             {
-                
+                /*
                 println!(
                     "cargo:rustc-link-search=native={}",
                     sdk_path.join("lib/linux32/release").to_str().unwrap()
                 );
                 println!("cargo:rustc-link-lib=static=protobuf");
                 // config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
+                */
+                let protobuf_path = sdk_path.join("lib/linux32/release/libprotobuf.a");
+                if !protobuf_path.exists() {
+                    panic!("Protocol Buffers library not found at: {}", protobuf_path.display());
+                }
+                
+                // Add the search path
+                println!(
+                    "cargo:rustc-link-search=native={}",
+                    sdk_path.join("lib/linux32/release").to_str().unwrap()
+                );
+                
+                // Link statically with whole-archive to ensure all symbols are included
+                println!("cargo:rustc-link-arg=-Wl,--whole-archive");
+                println!("cargo:rustc-link-lib=static=protobuf");
+                println!("cargo:rustc-link-arg=-Wl,--no-whole-archive");
+                
+                // Add additional dependencies that protobuf might need
+                println!("cargo:rustc-link-lib=stdc++");
+                println!("cargo:rustc-link-lib=m");
+                println!("cargo:rustc-link-lib=pthread");
             }
 
             config.include(sdk_path.join("common/protobuf-2.5.0/src"));
