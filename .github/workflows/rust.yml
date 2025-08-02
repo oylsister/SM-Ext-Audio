@@ -27,10 +27,12 @@ jobs:
 
     - name: Install Linux cross-compilation dependencies
       run: |
+        sudo dpkg --add-architecture i386
         sudo apt-get update
         sudo apt-get install -y gcc-multilib
-        sudo apt-get install -y libstdc++-dev:i386
-        sudo apt-get install -y libc6-dev:i386
+        sudo apt-get install -y g++-12-multilib
+        sudo apt-get install -y libc6-dev-i386
+        sudo apt-get install -y libstdc++-12-dev:i386
         sudo apt-get install -y libprotobuf-dev:i386 protobuf-compiler
 
     - name: Git Clone Dependencies
