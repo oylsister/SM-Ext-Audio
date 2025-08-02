@@ -70,6 +70,8 @@ impl FFmpeg {
         let args = vec![
             "-ss",
             &ss,
+            "-af",
+            "volume=0.15",
             "-acodec",
             "pcm_s16le",
             "-ac",

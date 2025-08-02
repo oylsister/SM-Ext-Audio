@@ -29,9 +29,9 @@ const FFMPEG_FILENAME: &str = "ffmpeg.exe";
 const FFMPEG_FILENAME: &str = "ffmpeg";
 
 #[cfg(target_os = "windows")]
-const YOUTUBE_DL_FILENAME: &str = "youtube-dl.exe";
+const YOUTUBE_DL_FILENAME: &str = "yt-dlp.exe";
 #[cfg(target_os = "linux")]
-const YOUTUBE_DL_FILENAME: &str = "youtube-dl";
+const YOUTUBE_DL_FILENAME: &str = "yt-dlp";
 
 const SAMPLERATE: usize = 22050;
 const FRAMESIZE: usize = 512;
