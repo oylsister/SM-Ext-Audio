@@ -132,6 +132,8 @@ mod metamod {
             config.include(sdk_path.join("common/protobuf-2.5.0/src"));
         }
 
+        config.include(sdk_path.join("common/protobuf-2.5.0/src"));
+
         #[cfg(target_env = "msvc")]
         {
             config.define("COMPILER_MSVC", None);
@@ -156,6 +158,17 @@ mod metamod {
             config.object(sdk_path.join("lib/linux/libvstdlib.so"));
             config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
         }
+
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/message.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/descriptor.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/descriptor.pb.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/io/coded_stream.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/extension_set.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/generated_message_util.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/io/zero_copy_stream.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/io/zero_copy_stream_impl_lite.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/unknown_field_set.cc"));
+        config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/wire_format_lite.cc"));
 
         config.file(sdk_path.join("public/engine/protobuf/netmessages.pb.cc"));
     }
