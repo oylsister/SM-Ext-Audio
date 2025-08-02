@@ -85,51 +85,47 @@ mod metamod {
         config.include(sdk_path.join("game/shared"));
         config.include(sdk_path.join("common"));
 
-        if cfg!(feature = "protobuf") {
-            #[cfg(target_env = "msvc")]
+        #[cfg(target_env = "msvc")]
+        {
+            #[cfg(debug_assertions)]
             {
-                #[cfg(debug_assertions)]
-                {
-                    config.object(sdk_path.join("lib/win32/release/vs2017/libprotobuf.lib"));
-                }
-                #[cfg(not(debug_assertions))]
-                {
-                    config.object(sdk_path.join("lib/win32/release/vs2017/libprotobuf.lib"));
-                }
+                config.object(sdk_path.join("lib/win32/release/vs2017/libprotobuf.lib"));
             }
-            #[cfg(target_env = "gnu")]
+            #[cfg(not(debug_assertions))]
             {
-                /*
-                println!(
-                    "cargo:rustc-link-search=native={}",
-                    sdk_path.join("lib/linux32/release").to_str().unwrap()
-                );
-                println!("cargo:rustc-link-lib=static=protobuf");
-                // config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
-                */
-                let protobuf_path = sdk_path.join("lib/linux32/release/libprotobuf.a");
-                if !protobuf_path.exists() {
-                    panic!("Protocol Buffers library not found at: {}", protobuf_path.display());
-                }
-                
-                // Add the search path
-                println!(
-                    "cargo:rustc-link-search=native={}",
-                    sdk_path.join("lib/linux32/release").to_str().unwrap()
-                );
-                
-                // Link statically with whole-archive to ensure all symbols are included
-                println!("cargo:rustc-link-arg=-Wl,--whole-archive");
-                println!("cargo:rustc-link-lib=static=protobuf");
-                println!("cargo:rustc-link-arg=-Wl,--no-whole-archive");
-                
-                // Add additional dependencies that protobuf might need
-                println!("cargo:rustc-link-lib=stdc++");
-                println!("cargo:rustc-link-lib=m");
-                println!("cargo:rustc-link-lib=pthread");
+                config.object(sdk_path.join("lib/win32/release/vs2017/libprotobuf.lib"));
             }
-
-            config.include(sdk_path.join("common/protobuf-2.5.0/src"));
+        }
+        #[cfg(target_env = "gnu")]
+        {
+            /*
+            println!(
+                "cargo:rustc-link-search=native={}",
+                sdk_path.join("lib/linux32/release").to_str().unwrap()
+            );
+            println!("cargo:rustc-link-lib=static=protobuf");
+            // config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
+            */
+            let protobuf_path = sdk_path.join("lib/linux32/release/libprotobuf.a");
+            if !protobuf_path.exists() {
+                panic!("Protocol Buffers library not found at: {}", protobuf_path.display());
+            }
+            
+            // Add the search path
+            println!(
+                "cargo:rustc-link-search=native={}",
+                sdk_path.join("lib/linux32/release").to_str().unwrap()
+            );
+            
+            // Link statically with whole-archive to ensure all symbols are included
+            println!("cargo:rustc-link-arg=-Wl,--whole-archive");
+            println!("cargo:rustc-link-lib=static=protobuf");
+            println!("cargo:rustc-link-arg=-Wl,--no-whole-archive");
+            
+            // Add additional dependencies that protobuf might need
+            println!("cargo:rustc-link-lib=stdc++");
+            println!("cargo:rustc-link-lib=m");
+            println!("cargo:rustc-link-lib=pthread");
         }
 
         config.include(sdk_path.join("common/protobuf-2.5.0/src"));
@@ -158,7 +154,7 @@ mod metamod {
             config.object(sdk_path.join("lib/linux/libvstdlib.so"));
             config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
         }
-
+        /*
         config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/message.cc"));
         config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/descriptor.cc"));
         config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/descriptor.pb.cc"));
@@ -169,7 +165,7 @@ mod metamod {
         config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/io/zero_copy_stream_impl_lite.cc"));
         config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/unknown_field_set.cc"));
         config.file(sdk_path.join("common/protobuf-2.5.0/src/google/protobuf/wire_format_lite.cc"));
-
+        */
         config.file(sdk_path.join("public/engine/protobuf/netmessages.pb.cc"));
     }
 }
