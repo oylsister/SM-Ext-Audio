@@ -41,6 +41,7 @@ jobs:
         export SOURCEMOD="${{ github.workspace }}/deps/sourcemod"
         export MMSOURCE="${{ github.workspace }}/deps/mmsource"
         export HL2SDKCSGO="${{ github.workspace }}/deps/hl2sdk-csgo"
+        rustup target add i686-unknown-linux-gnu
         cargo build --target i686-unknown-linux-gnu --release
 
     - name: Upload Build Artifacts
