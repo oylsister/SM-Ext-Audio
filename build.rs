@@ -104,7 +104,7 @@ mod metamod {
                     "cargo:rustc-link-search=native={}",
                     sdk_path.join("lib/linux32/release").to_str().unwrap()
                 );
-                println!("cargo:rustc-link-lib=protobuf");
+                println!("cargo:rustc-link-lib=static=protobuf");
                 // config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
             }
 
