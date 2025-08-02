@@ -154,6 +154,7 @@ mod metamod {
 
             config.object(sdk_path.join("lib/linux/libtier0.so"));
             config.object(sdk_path.join("lib/linux/libvstdlib.so"));
+            config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
         }
 
         config.file(sdk_path.join("public/engine/protobuf/netmessages.pb.cc"));
