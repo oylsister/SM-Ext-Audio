@@ -99,14 +99,13 @@ mod metamod {
             }
             #[cfg(target_env = "gnu")]
             {
-                /*
+                
                 println!(
                     "cargo:rustc-link-search=native={}",
                     sdk_path.join("lib/linux32/release").to_str().unwrap()
                 );
-                println!("cargo:rustc-link-lib=static=protobuf",);
-                */
-                config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
+                println!("cargo:rustc-link-lib=protobuf");
+                // config.object(sdk_path.join("lib/linux32/release/libprotobuf.a"));
             }
 
             config.include(sdk_path.join("common/protobuf-2.5.0/src"));
